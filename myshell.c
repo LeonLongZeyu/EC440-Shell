@@ -66,9 +66,9 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
             file_descriptor[1] = fd_out;
         }
 
-        if (the_pipeline->commands->redirect_in_path)
+        if (the_pipeline -> commands -> redirect_in_path)
         {
-            int input_fd = open(the_pipeline->commands->redirect_in_path, 0x0000);
+            int input_fd = open(the_pipeline -> commands -> redirect_in_path, 0x0000);
 
             if (input_fd < 0)
             {
@@ -101,6 +101,7 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
             {
                 dup2(file_descriptor[1], 1);
             }
+
             if(the_pipeline -> commands -> redirect_in_path)
             {
                 dup2(file_descriptor[1], 0);
@@ -111,7 +112,7 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
         //for fork()
         if(execvp(the_pipeline -> commands -> command_args[0], the_pipeline -> commands -> command_args) == -1)
         {
-            perror("ERROR");
+            perror("ERROR: Failed to fork.\n");
             exit(1);
         }
 
@@ -191,6 +192,7 @@ int main(int argc, char* argv[])
         {
             the_pipeline = pipeline_build(command_line);
 
+            //Variables for control
             int input = 0;
             int first = 1;
 
