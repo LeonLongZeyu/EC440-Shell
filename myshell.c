@@ -32,11 +32,11 @@ void signalHandler()
 }
 
 //Function that executes the command line
-int execute_command(struct pipeline *the_pipeline, int input, int first, int last, bool background)
+int execute_command(struct pipeline* the_pipeline, int input, int first, int last, bool background)
 {
     pid_t child_pid;
-    int file_descriptor[2];
     int status;
+    int file_descriptor[2];
 
     //Forking
     child_pid = fork();
@@ -49,30 +49,30 @@ int execute_command(struct pipeline *the_pipeline, int input, int first, int las
     {
         if(background)
         {
-            //close(STDOUT_FILENO);
+            //close(1);
             close(file_descriptor[1]);
         }    
         
         if(first == 1 && last == 0 && input == 0)
         {
-            dup2(file_descriptor[1], STDOUT_FILENO);
+            dup2(file_descriptor[1], 1);
         }
         else if(first == 0 && last == 0 && input != 0)
         {
-            dup2(input, STDIN_FILENO);
-            dup2(file_descriptor[1], STDOUT_FILENO);
+            dup2(input, 0);
+            dup2(file_descriptor[1], 1);
         }
         else
         {
             if(the_pipeline -> commands -> redirect_out_path)
             {
-                dup2(file_descriptor[1], STDOUT_FILENO);
+                dup2(file_descriptor[1], 1);
             }
             if(the_pipeline -> commands -> redirect_in_path)
             {
-                dup2(file_descriptor[1], STDIN_FILENO);
+                dup2(file_descriptor[1], 0);
             }
-            dup2(input, STDIN_FILENO);
+            dup2(input, 0);
         }
         
         if(execvp(the_pipeline -> commands -> command_args[0], the_pipeline -> commands -> command_args) == -1)
@@ -82,8 +82,8 @@ int execute_command(struct pipeline *the_pipeline, int input, int first, int las
         }
 
         close(file_descriptor[1]);
-        close(STDIN_FILENO);
-        dup(STDIN_FILENO);
+        close(0);
+        dup(0);
         close(file_descriptor[0]);
         
     }
