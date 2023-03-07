@@ -16,7 +16,7 @@
 #define SPECIAL_CHARS "&|<>"
 
 //Selector: Determines what tokens are present
-bool selector(const char* line, const char* chars)
+bool selector(char* line, char* chars)
 {
     if(strstr(line, chars))
     {
@@ -226,7 +226,7 @@ struct pipeline *pipeline_build(const char *command_line)
 	char* cline = strdup(command_line);
 	char* pipe_tokens;
 
-    //Check for & to run in background
+    //Check for ampersand & to run in background
     bool is_background = background_check(cline);
     if (is_background)
     {
