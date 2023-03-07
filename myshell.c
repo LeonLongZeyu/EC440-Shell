@@ -124,19 +124,29 @@ int main(int argc, char* argv[])
     struct pipeline* the_pipeline;
     bool suppress;
 
-    //Waiting for the child processes
-    signal(SIGCHLD, signalHandler);
-    
     //Check for -n character that suppresses the my_shell$ prompt
     if((argc > 1) && selector(argv[1], SUPPRESS))
     {
         suppress = 1;
-    }
+    }   
 
-    //Infinite loop for constantly printing myshell$, except when CRTL^D
+    //Waiting for the child processes
+    signal(SIGCHLD, signalHandler);
+
+    //Infinite loop for constantly printing my_shell$, except when CRTL^D
     while(1)
     {
         const char *command_line;
+
+        //Suppress prompt
+        if(suppress)
+        {
+            //DO NOT print promt my_shell$
+        }
+        else
+        {
+            printf("my_shell$ ");
+        }
 
         //Ctrl^D command to exit the shell
         if((command_line = fgets(buf, MAX_LINE_LENGTH, stdin)) == NULL)
