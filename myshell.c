@@ -79,7 +79,7 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
             if (dup2(input_fd, 0) < 0)
             {
                 perror("ERROR: Failed to redirect input.\n");
-                exit(E0);
+                exit(0);
             }
             close(input_fd);
         }
@@ -108,7 +108,7 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
 
         if(execvp(the_pipeline -> commands -> command_args[0], the_pipeline -> commands -> command_args) == -1)
         {
-            fprintf(stderr, "ERROR: %s.\n", the_pipeline -> commands -> command_args[0], strerror(errno));
+            perror("ERROR");
             exit(1);
         }
 
