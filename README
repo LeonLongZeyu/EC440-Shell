@@ -1,5 +1,25 @@
-The parser was the hardest part of the program. I initially gave up working on this assingment as it was way beyond my level and I had too much work.
-However, the extension gave me some hope that maybe I could get some points and get a D in this class.
-I struggled the most with pointers as I have not practiced enough, so I read a lot on them and that kinda helped.
+The parser was the hardest part of the program, getting all the structs right was extremely difficult.
+I initially gave up working on this assingment as it was way beyond my level and I had too much work.
+However, the extension gave me some hope that maybe I could get some points to help my graede.
+I struggled the most with pointers and structs as I have not practiced enough, so I read a lot on them and that kinda helped.
+It also did not help that I failed all the test cases, but thankfully i decided to ignore it for now and work on the actual shell.
 Making the actual shell was not as bad as I thought as most of the code was demoed in class and I took this class before, so I used code that I previously worked on.
 Redirecting is also extremely challenging. I was unable to solve it, hopefully working more on it will allow me to pass more test cases.
+All that being said, I am glad to have made a valiant attempt at this assignment as it really pushed me past my limits and I gained a lot of knowledge through doing it.
+
+Sources (not exhaustive) :
+https://www.tutorialspoint.com/cprogramming/c_pointers.htm
+https://www.scaler.com/topics/uses-of-pointers-in-c/
+https://www.guru99.com/c-pointers.html
+https://www.geeksforgeeks.org/strdup-strdndup-functions-c/
+https://www.digitalocean.com/community/tutorials/execvp-function-c-plus-plus
+https://www.tutorialspoint.com/c_standard_library/c_function_strstr.htm
+https://www.tutorialspoint.com/c_standard_library/c_function_strtok.htm
+https://www.javatpoint.com/linux-man
+https://www.scaler.com/topics/c-fork/
+https://stackoverflow.com/questions/24538470/what-does-dup2-do-in-c
+https://valgrind.org/docs/manual/quick-start.html
+https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/
+https://mariadb.com/kb/en/compile-and-using-mariadb-with-sanitizers-asan-ubsan-tsan-msan/
+https://stackoverflow.com/questions/31805590/ubsan-and-asan-usage-with-gcc-4-9-2
+https://www.cs.swarthmore.edu/~newhall/Debugging/
