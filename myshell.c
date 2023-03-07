@@ -51,7 +51,38 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
         {
             //close(1);
             close(file_descriptor[1]);
-        }    
+        }
+
+        if (the_pipeline -> commands -> redirect_out_path)
+        {
+            int fd_out = creat(the_pipeline -> commands -> redirect_out_path, 0644);
+
+            if (fd_out == -1)
+            {
+                perror("ERROR: Failed to open output file.\n");
+                exit(0);
+            }
+            
+            file_descriptor[1] = fd_out;
+        }
+
+        if (the_pipeline->commands->redirect_in_path)
+        {
+            int input_fd = open(the_pipeline->commands->redirect_in_path, 0x0000);
+
+            if (input_fd < 0)
+            {
+                perror("ERROR: Failed to open input file.\n");
+                exit(0);
+            }
+
+            if (dup2(input_fd, 0) < 0)
+            {
+                perror("ERROR: Failed to redirect input.\n");
+                exit(E0);
+            }
+            close(input_fd);
+        }
         
         if(first == 1 && last == 0 && input == 0)
         {
@@ -74,10 +105,10 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
             }
             dup2(input, 0);
         }
-        
+
         if(execvp(the_pipeline -> commands -> command_args[0], the_pipeline -> commands -> command_args) == -1)
         {
-            perror("ERROR");
+            fprintf(stderr, "ERROR: %s.\n", the_pipeline -> commands -> command_args[0], strerror(errno));
             exit(1);
         }
 
@@ -156,6 +187,7 @@ int main(int argc, char* argv[])
         else
         {
             the_pipeline = pipeline_build(command_line);
+
             int input = 0;
             int first = 1;
 
