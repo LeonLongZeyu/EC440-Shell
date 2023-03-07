@@ -82,6 +82,8 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
                 exit(0);
             }
             close(input_fd);
+
+            file_descriptor[0] = input_fd;
         }
         
         if(first == 1 && last == 0 && input == 0)
@@ -106,6 +108,7 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
             dup2(input, 0);
         }
 
+        //for fork()
         if(execvp(the_pipeline -> commands -> command_args[0], the_pipeline -> commands -> command_args) == -1)
         {
             perror("ERROR");
