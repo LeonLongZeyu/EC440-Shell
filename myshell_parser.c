@@ -145,7 +145,7 @@ struct pipeline_command* parse_command(char* cline, struct pipeline_command* p_c
 //Handles the redir_in '<' command
     if (selector(cline, REDIR_IN))
     {
-        if (token != NULL)
+        if (tokens != NULL)
         {
             line = strdup(cline);
             tokens = strtok(line, REDIR_IN);
@@ -168,7 +168,7 @@ struct pipeline_command* parse_command(char* cline, struct pipeline_command* p_c
 //Handles the redir_out '>' command
     if (selector(cline, REDIR_OUT))
     {
-        if (token != NULL)
+        if (tokens != NULL)
         {
             line = strdup(cline);
             tokens = strtok(line, REDIR_IN);
