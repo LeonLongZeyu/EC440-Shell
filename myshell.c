@@ -40,8 +40,10 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
     int file_descriptor[2];
 
     //Creating a pipe
-    if (pipe(file_descriptor) == -1) {
+    if (pipe(file_descriptor) == -1)
+    {
         perror("pipe");
+        printf("ERROR: Failed to create pipe.\n");
         exit(EXIT_FAILURE);
     }
 
@@ -55,9 +57,12 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
         close(file_descriptor[0]);
 
         // Redirecting input if necessary
-        if (input != 0) {
-            if (dup2(input, STDIN_FILENO) == -1) {
+        if (input != 0)
+        {
+            if (dup2(input, STDIN_FILENO) == -1)
+            {
                 perror("dup2");
+                printf("ERROR: Failed to redirect input.\n");
                 exit(EXIT_FAILURE);
             }
             close(input);
@@ -65,18 +70,24 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
 
         // Redirecting output if necessary
         if (!last) {
-            if (dup2(file_descriptor[1], STDOUT_FILENO) == -1) {
+            if (dup2(file_descriptor[1], STDOUT_FILENO) == -1)
+            {
                 perror("dup2");
+                printf("ERROR: Failed to redirect output.\n");
                 exit(EXIT_FAILURE);
             }
         }
-        else if (the_pipeline->commands->redirect_out_path) {
-            int fd_out = creat(the_pipeline->commands->redirect_out_path, 0644);
-            if (fd_out == -1) {
+        else if (the_pipeline -> commands -> redirect_out_path)
+        {
+            int fd_out = creat(the_pipeline -> commands -> redirect_out_path, 0644);
+            if (fd_out == -1)
+            {
                 perror("open");
+                printf("ERROR: Failed to open file.\n");
                 exit(EXIT_FAILURE);
             }
-            if (dup2(fd_out, STDOUT_FILENO) == -1) {
+            if (dup2(fd_out, STDOUT_FILENO) == -1)
+            {
                 perror("dup2");
                 exit(EXIT_FAILURE);
             }
@@ -84,8 +95,10 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
         }
 
         // Executing the command
-        if (execvp(the_pipeline->commands->command_args[0], the_pipeline->commands->command_args) == -1) {
+        if (execvp(the_pipeline -> commands -> command_args[0], the_pipeline -> commands -> command_args) == -1)
+        {
             perror("execvp");
+            printf("ERROR: Failed to execute command.\n");
             exit(EXIT_FAILURE);
         }
     }
@@ -116,8 +129,6 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
 
     return 0;
 }
-
-
 
 int main(int argc, char* argv[])
 {
