@@ -59,7 +59,7 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
         {
             if (dup2(input, STDIN_FILENO) == -1)
             {
-                perror("ERROR: Failed to open input file.\n");
+                perror("ERROR: Failed to redirect input.\n");
                 exit(EXIT_FAILURE);
             }
             close(input);
@@ -70,7 +70,7 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
         {
             if (dup2(file_descriptor[1], STDOUT_FILENO) == -1)
             {
-                perror("ERROR: Failed to redirect input.\n");
+                perror("ERROR: Failed to redirect output.\n");
                 exit(EXIT_FAILURE);
             }
         }
