@@ -47,7 +47,7 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
     //Child
     if (child_pid == 0)
     {
-        close(file_descriptor[0])
+        close(file_descriptor[0]);
         
         if(background)
         {
