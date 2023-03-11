@@ -79,7 +79,6 @@ int execute_command(struct pipeline* the_pipeline, int input, int first, int las
             int fd_out = creat(the_pipeline->commands->redirect_out_path, 0644);
             if (fd_out == -1)
             {
-                perror("ERROR: Failed to open output file.\n");
                 exit(EXIT_FAILURE);
             }
             if (dup2(fd_out, STDOUT_FILENO) == -1)
