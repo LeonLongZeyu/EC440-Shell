@@ -5,7 +5,6 @@ I struggled the most with pointers and structs as I have not practiced enough, s
 It also did not help that I failed all the test cases, but thankfully i decided to ignore it for now and work on the actual shell.
 Making the actual shell was not as bad as I thought as most of the code was demoed in class and I took this class before, so I used code that I previously worked on.
 Redirecting is also extremely challenging. I was unable to solve it, hopefully working more on it will allow me to pass more test cases.
-All that being said, I am glad to have made a valiant attempt at this assignment as it really pushed me past my limits and I gained a lot of knowledge through doing it.
 
 Sources (not exhaustive) :
 https://www.tutorialspoint.com/cprogramming/c_pointers.htm
@@ -23,3 +22,9 @@ https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/
 https://mariadb.com/kb/en/compile-and-using-mariadb-with-sanitizers-asan-ubsan-tsan-msan/
 https://stackoverflow.com/questions/31805590/ubsan-and-asan-usage-with-gcc-4-9-2
 https://www.cs.swarthmore.edu/~newhall/Debugging/
+https://www.ibm.com/docs/en/i/7.2?topic=ssw_ibm_i_72/apis/dup2.html
+https://www.tutorialspoint.com/c_standard_library/c_function_perror.htm
+https://man7.org/linux/man-pages/man3/errno.3.html
+https://man7.org/linux/man-pages/man2/dup.2.html
+https://man7.org/linux/man-pages/man2/fork.2.html
+https://man7.org/linux/man-pages/man3/exec.3.html
