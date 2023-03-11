@@ -248,8 +248,6 @@ struct pipeline *pipeline_build(const char *command_line)
     bool is_background = background_check(cline);
     if (is_background)
     {
-        char *line = strdup(cline);
-        line = strtok(line, AMPERSAND);
         pipeline_pipeline -> is_background = true;
     }
 
