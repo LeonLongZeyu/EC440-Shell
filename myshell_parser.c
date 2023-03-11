@@ -183,17 +183,28 @@ struct pipeline_command* parse_command(char* cline, struct pipeline_command* p_c
     }
 
 //Splits the command line into WHITESPACE and then SPECIAL_CHARS (Parsing?)
-    while ((tokens = strtok_r(cline, WHITESPACE, &cline))) 
-    { 
-        while ((tok = strtok_r(tokens, SPECIAL_CHARS, &tokens))) 
-        { 
-            p_command -> command_args[position_pointer] = tok;
+    char* tokens_WHITESPACE = strtok_r(cline, WHITESPACE, &cline);
+
+    while (tokens_WHITESPACE != NULL)
+    {
+        // Parse each token using strtok_r()
+        char* tok_SPECIAL_CHARS = strtok_r(tokens_WHITESPACE, SPECIAL_CHARS, &tokens_WHITESPACE);
+
+        while (tok_SPECIAL_CHARS != NULL)
+        {
+            // Store each token in an array of command arguments
+            p_command -> command_args[position_pointer] = tok_SPECIAL_CHARS;
+            position_pointer++;
+
+            // Parse the next token using strtok_r()
+            tok_SPECIAL_CHARS = strtok_r(tokens_WHITESPACE, SPECIAL_CHARS, &tokens_WHITESPACE);
         }
 
-        position_pointer++; 
-    } 
- 
-    return p_command; 
+        // Parse the next command argument using strtok_r()
+        tokens_WHITESPACE = strtok_r(cline, WHITESPACE, &cline);
+    }
+
+    return p_command;
 }
 
 //Creates pipeline of commands to be executed in a sequence
