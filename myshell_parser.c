@@ -145,14 +145,11 @@ struct pipeline_command* parse_command(char* cline, struct pipeline_command* p_c
 //Handles the redir_in '<' command
     if (selector(cline, REDIR_IN))
     {
-        if (p_command != NULL)
-        {
-            line = strdup(cline);
-            tokens = strtok(line, REDIR_IN);
-            tokens = strtok(NULL, REDIR_IN);
-            tokens = strtok(tokens, WHITESPACE);
-            tokens = strtok(tokens, SPECIAL_CHARS);
-        }
+        line = strdup(cline);
+        tokens = strtok(line, REDIR_IN);
+        tokens = strtok(NULL, REDIR_IN);
+        tokens = strtok(tokens, WHITESPACE);
+        tokens = strtok(tokens, SPECIAL_CHARS);
         p_command -> redirect_in_path = tokens;
         temp = strdup(cline);
         oldWordLength = strlen(tokens);
@@ -168,14 +165,11 @@ struct pipeline_command* parse_command(char* cline, struct pipeline_command* p_c
 //Handles the redir_out '>' command
     if (selector(cline, REDIR_OUT))
     {
-        if (p_command != NULL)
-        {
-            line = strdup(cline);
-            tokens = strtok(line, REDIR_IN);
-            tokens = strtok(NULL, REDIR_IN);
-            tokens = strtok(tokens, WHITESPACE);
-            tokens = strtok(tokens, SPECIAL_CHARS);
-        }
+        line = strdup(cline);
+        tokens = strtok(line, REDIR_IN);
+        tokens = strtok(NULL, REDIR_IN);
+        tokens = strtok(tokens, WHITESPACE);
+        tokens = strtok(tokens, SPECIAL_CHARS);
         p_command -> redirect_out_path = tokens;
         temp = strdup(cline);
         oldWordLength = strlen(tokens);
