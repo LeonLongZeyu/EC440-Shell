@@ -136,7 +136,6 @@ struct pipeline_command* parse_command(char* cline, struct pipeline_command* p_c
     int c = 0;
     int newWordLength = 0;
     int oldWordLength = 0;
-    char* tokens;
     char* tok;
     char* line;
     char* result;
