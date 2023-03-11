@@ -136,20 +136,23 @@ struct pipeline_command* parse_command(char* cline, struct pipeline_command* p_c
     int c = 0;
     int newWordLength = 0;
     int oldWordLength = 0;
+    char* tokens;
     char* tok;
     char* line;
     char* result;
     char* temp;
-    char* tokens;
 
 //Handles the redir_in '<' command
     if (selector(cline, REDIR_IN))
     {
-        line = strdup(cline);
-        tokens = strtok(line, REDIR_IN);
-        tokens = strtok(NULL, REDIR_IN);
-        tokens = strtok(tokens, WHITESPACE);
-        tokens = strtok(tokens, SPECIAL_CHARS);
+        if (token != NULL)
+        {
+            line = strdup(cline);
+            tokens = strtok(line, REDIR_IN);
+            tokens = strtok(NULL, REDIR_IN);
+            tokens = strtok(tokens, WHITESPACE);
+            tokens = strtok(tokens, SPECIAL_CHARS);
+        }
         p_command -> redirect_in_path = tokens;
         temp = strdup(cline);
         oldWordLength = strlen(tokens);
@@ -165,11 +168,14 @@ struct pipeline_command* parse_command(char* cline, struct pipeline_command* p_c
 //Handles the redir_out '>' command
     if (selector(cline, REDIR_OUT))
     {
-        line = strdup(cline);
-        tokens = strtok(line, REDIR_OUT);
-        tokens = strtok(NULL, REDIR_OUT);
-        tokens = strtok(tokens, WHITESPACE);
-        tokens = strtok(tokens, SPECIAL_CHARS);
+        if (token != NULL)
+        {
+            line = strdup(cline);
+            tokens = strtok(line, REDIR_IN);
+            tokens = strtok(NULL, REDIR_IN);
+            tokens = strtok(tokens, WHITESPACE);
+            tokens = strtok(tokens, SPECIAL_CHARS);
+        }
         p_command -> redirect_out_path = tokens;
         temp = strdup(cline);
         oldWordLength = strlen(tokens);
