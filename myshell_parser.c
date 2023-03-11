@@ -35,7 +35,7 @@ struct pipeline_command* initialize_pipeline_command_structure()
 
     if (!pipeline_command_structure) //Failure message for malloc()
     {
-        //printf("ERROR: Pipeline Command Structure failed to initialize\n");
+        printf("ERROR: Pipeline Command Structure failed to initialize\n");
 	}
     else
     {
@@ -60,7 +60,7 @@ struct pipeline* initialize_pipeline()
 
     if (!pipeline)//Failure message for malloc()
     {
-        //printf("ERROR: Pipeline failed to initialize\n");
+        printf("ERROR: Pipeline failed to initialize\n");
     }
     else
     {
@@ -183,13 +183,23 @@ struct pipeline_command* parse_command(char* cline, struct pipeline_command* p_c
     }
 
 //Splits the command line into WHITESPACE and then SPECIAL_CHARS (Parsing?)
-    while ((tokens = strtok_r(cline, WHITESPACE, &cline)))
-    {
-        while ((tok = strtok_r(tokens, SPECIAL_CHARS, &tokens)))
-        {
-            p_command -> command_args[position_pointer] = tok;
+    char* tokens = strtok_r(cline, WHITESPACE, &cline);
+
+    while (tokens != NULL) {
+        // Parse each token using strtok_r()
+        char* tok = strtok_r(tokens, SPECIAL_CHARS, &tokens);
+
+        while (tok != NULL) {
+            // Store each token in an array of command arguments
+            p_command->command_args[position_pointer] = tok;
             position_pointer++;
+
+            // Parse the next token using strtok_r()
+            tok = strtok_r(tokens, SPECIAL_CHARS, &tokens);
         }
+
+        // Parse the next command argument using strtok_r()
+        tokens = strtok_r(cline, WHITESPACE, &cline);
     }
 
     return p_command;
