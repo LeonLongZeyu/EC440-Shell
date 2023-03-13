@@ -261,7 +261,7 @@ struct pipeline *pipeline_build(const char *command_line)
 		}
 
 	}
-    /*else
+    else
     {
         //Tokenizing cline with only one token without pipe |
 		while((pipe_tokens = strtok_r(cline, PIPE, &cline)))
@@ -269,7 +269,6 @@ struct pipeline *pipeline_build(const char *command_line)
 			pipelines(pipe_tokens, pipeline_pipeline);
 		}
 	}
-	*/
 
 	return pipeline_pipeline;
 }
